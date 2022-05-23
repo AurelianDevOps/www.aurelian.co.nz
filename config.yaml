@@ -171,12 +171,12 @@ params:
     socialmediatitle: Follow Us
     # Social media links (GitHub, Twitter, etc.). All are optional.
     socialmedia:
-    - link: https://github.com/aurelian
+    - link: https://github.com/AurelianDevOps
       # Icons are from Font Awesome
       icon: github
-    - link: https://facebook.com/aurelian
-      icon: facebook
-    - link: https://twitter.com/aurelian
+    # - link: https://facebook.com/aurelian
+    #   icon: facebook
+    - link: https://twitter.com/AurelianDevOps
       icon: twitter
     bulmalogo: true
     quicklinks:
@@ -191,4 +191,4 @@ params:
         title: "Blog"
         links:
         - text: Latest blog entry
-          link: /blog/initial-work-on-a-new-distro
+          link: /blog/how-to-deploy-a-static-site-with-hugo/

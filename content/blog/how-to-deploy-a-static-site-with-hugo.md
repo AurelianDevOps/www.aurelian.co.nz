@@ -36,26 +36,139 @@ Now let's add the theme.
 % git submodule add https://github.com/StefMa/hugo-fresh themes/hugo-fresh
 ```
 
-Copy over the exampleSite's `themes/hugo-fresh/exampleSite/config.toml`. I commented out the sidebar and some of the other elements and renamed the `baseURL` and `title` variables.
+Copy over the example config file `themes/hugo-fresh/exampleSite/config.toml`. I commented out the sidebar and some of the other elements and renamed the `baseURL` and `title` variables.
 ```yaml
 baseURL: https://www.aurelian.co.nz/
 languageCode: en-us
 title: aurelian.co.nz
 theme: hugo-fresh
-...
+
+#googleAnalytics:
+
+# Disables warnings
+disableKinds:
+  - taxonomy
+  - taxonomyTerm
+markup:
+  goldmark:
+    renderer:
+      unsafe: true # Allows you to write raw html in your md files
+
+params:
+  # Open graph allows easy social sharing. If you don't want it you can set it to false or just delete the variable
+  openGraph: false
+  # Used as meta data; describe your site to make Google Bots happy
+  description: Consulting and end user support
+  navbarlogo:
+  # Logo (from static/images/logos/___)
+    image: logos/aurelian.svg
+    link: /
+  font:
+    name: "Open Sans"
+    sizes: [400,600]
+  hero:
+    # Main hero title
+    title: Consulting and Support
+    # Hero subtitle (optional)
+    subtitle: Restore your computing world
+    # Button text
+    buttontext: Contact us
+    # Where the main hero button links to
+    buttonlink: "/contact"
+    # Hero image (from static/images/___)
+    image: illustrations/worker.svg
+    # Footer logos (from static/images/logos/clients/___.svg)
+    # clientlogos:
+    # - systek
+    # - tribe
+    # - kromo
+    # - infinite
+    # - gutwork
+
+  # Customizable navbar. For a dropdown, add a "sublinks" list.
+  navbar:
+  - title: Blog
+    url: /blog
+  - title: Services
+    url: /services
+  - title: Pricing
+    url: /pricing
+  - title: Contact Us
+    url: /contact
+
+  section1:
+    title: Services
+    subtitle: that we offer
+    tiles:
+    - title: Websites & Emails
+      icon: mouse-globe
+      text: Custom sites and email for your domain
+      url: /domain
+      buttonText: Get Started
+    - title: Integration & Automation
+      icon: plug-cloud
+      text: Service integrations with 3rd party apps and automation
+      url: /integrations
+      buttonText: Get started
+    - title: Support
+      icon: laptop-cloud
+      text: End user support for Windows, macOS and Linux
+      url: /support
+      buttonText: Get started
+
+  section2:
+    title: Secure, powerful and efficient
+    subtitle: let us handle it
+    features:
+    - title: Secure
+      text: We like keep things simple for you. Structure and protect your data.
+      # Icon (from /images/illustrations/icons/___.svg)
+      icon: shield-checkmark-outline
+    - title: Powerfull
+      text: Use the right tool for the job. We design solutions around AWS and Google Cloud Platform.
+      icon: logo-amazon
+    - title: Efficient
+      text: Get the most out of your money
+      icon: golf-outline
+
+  section5: true
+  footer:
+    # Logo (from /images/logos/___)
+    logo: aurelian-alt.svg
+    # Social Media Title
+    socialmediatitle: Follow Us
+    # Social media links (GitHub, Twitter, etc.). All are optional.
+    socialmedia:
+    - link: https://github.com/AurelianDevOps
+      # Icons are from Font Awesome
+      icon: github
+    - link: https://twitter.com/AurelianDevOps
+      icon: twitter
+    bulmalogo: true
+    quicklinks:
+      column1:
+        title: "Services"
+        links:
+        - text: Why choose us?
+          link: /choose-us
+        - text: About
+          link: /about
+      column2:
+        title: "Blog"
+        links:
+        - text: Latest blog entry
+          link: /blog/how-to-deploy-a-static-site-with-hugo/
 ```
 
-Add our first post.
+Add the first post.
 ```sh
 % hugo new blog/how-to-deploy-a-static-site-with-hugo.md
 ```
 
-Let's test it out
+Let's test it out. The `-D` flag tells hugo to include content marked as draft.
 ```sh
 % hugo server -D
 ```
-
-The `-D` flag tells hugo to include content marked as draft.
 
 ## Fixing the blog index
 
@@ -122,7 +235,7 @@ To get it to load the correctly we need to include the the other partials and us
   </section>
 {{ end }}
 ```
-One final thing before I finish this. The Title should say **Blog** and not **Blog**.
+One final thing before I finish this. The title should say **Blog** and not **Blogs**.
 Now we can use the `_index.md` file to overwrite the default value and change the draft variable to `false`
 ```yaml
 title: "Blog"
@@ -133,7 +246,7 @@ draft: false
 ## Deploying the site
 Hugo can also deploy directly to a Google Cloud Storage (GCS) bucket, an AWS S3 bucket, and/or an Azure Storage container. But I'm going to use Cloudflare Pages.
 
-We'll use [github](https://github.com) to host our code for Cloudflare to use. 
+We'll use [github](https://github.com) so that Cloudflare can pull changes and build the site with Hugo. 
 
 I'm using my public ssh key to authenticate. See [Generating a new ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [Adding a new ssh key to your github account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 
@@ -141,13 +254,13 @@ I'm using my public ssh key to authenticate. See [Generating a new ssh key](http
 % git init .
 % git commit -m "Initial commit"
 % git branch -M main
-% git remote add origin git@github.com:unusualTrouble/www.aurelian.co.nz.git
+% git remote add origin git@github.com:AurelianDevOps/www.aurelian.co.nz.git
 % git push -u origin main
 ```
 
 The last thing we need to do is set up Cloudflare to [deploy](https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/)  our site and connect our custom domain.
 
-The nice thing about Cloudflare Pages is that we can just push out changes with `git` and Cloudflare will rebuild the static files automatically.
+The nice thing about Cloudflare Pages is that we can just push changes with git and Cloudflare will rebuild the static files automatically.
 
 ## Whats next?
 
