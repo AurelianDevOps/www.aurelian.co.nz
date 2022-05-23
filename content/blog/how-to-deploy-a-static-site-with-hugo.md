@@ -1,15 +1,15 @@
 ---
 title: "How to Deploy a Static Site With Hugo"
 date: 2022-05-23T12:49:57+12:00
-draft: true
+draft: false
 ---
 
 I thought I would quickly make a post to document how I deploy this site using [hugo](https://gohugo.io).
 Although it is a straight forward process it is good idea to document it.
 
-I'll host the site on cloudflare [pages](https://pages.cloudflare.com/)
+I'll host the site on Cloudflare [Pages](https://pages.cloudflare.com/)
 
-If you want to follow along you'll need to install hugo on your local machine and sign up to [cloudflare](https://cloudflare.com/) (You can use any provider you want)
+If you want to follow along you'll need to install hugo on your local machine and sign up to [Cloudflare](https://cloudflare.com/) (You can use any provider you want)
 
 ## Initial setup
 
@@ -91,8 +91,6 @@ Looking at `layouts/_default/` in the theme folder shows no list.html file. Lets
 
 After reloading the site I get my list but it does not render correctly. Indeed this is a [issue](https://github.com/StefMa/hugo-fresh/issues/135) with the theme
 
-![wrong-layout](/images/blog/wrong-layout.png)
-
 To get it to load the correctly we need to include the the other partials and use the correct css class.
 ```html
 {{ define "main" }}
@@ -125,19 +123,32 @@ To get it to load the correctly we need to include the the other partials and us
 {{ end }}
 ```
 One final thing before I finish this. The Title should say **Blog** and not **Blog**.
-Now we can use the `_index.md` file to overwrite the default value.
+Now we can use the `_index.md` file to overwrite the default value and change the draft variable to `false`
 ```yaml
 title: "Blog"
 date: 2022-05-23T12:49:57+12:00
-draft: true
+draft: false
 ```
 
-This is the result. It looks a bit bare but I'll sort that out later. 
-![correct-layout](/images/blog/correct-layout.png)
-
 ## Deploying the site
-Hugo can deploy 
-Deploying is dead simple. We don't to run unit test or anything so lets just use scp to copy it to the server.
+Hugo can also deploy directly to a Google Cloud Storage (GCS) bucket, an AWS S3 bucket, and/or an Azure Storage container. But I'm going to use Cloudflare Pages.
 
+We'll use [github](https://github.com) to host our code for Cloudflare to use. 
 
-## TODO
+I'm using my public ssh key to authenticate. See [Generating a new ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [Adding a new ssh key to your github account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+```sh
+% git init .
+% git commit -m "Initial commit"
+% git branch -M main
+% git remote add origin git@github.com:unusualTrouble/www.aurelian.co.nz.git
+% git push -u origin main
+```
+
+The last thing we need to do is set up Cloudflare to [deploy](https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/)  our site and connect our custom domain.
+
+The nice thing about Cloudflare Pages is that we can just push out changes with `git` and Cloudflare will rebuild the static files automatically.
+
+## Whats next?
+
+I going to build a api so that I can add some basic features like a contact form, organize the blog urls by date, and fix some of the `hugo-fresh` theme issues.
