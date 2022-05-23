@@ -1,0 +1,194 @@
+baseURL: https://www.aurelian.co.nz/
+languageCode: en-us
+title: aurelian.co.nz
+theme: hugo-fresh
+
+#googleAnalytics:
+
+# Disables warnings
+disableKinds:
+  - taxonomy
+  - taxonomyTerm
+markup:
+  goldmark:
+    renderer:
+      unsafe: true # Allows you to write raw html in your md files
+
+params:
+  # Open graph allows easy social sharing. If you don't want it you can set it to false or just delete the variable
+  openGraph: false
+  # Used as meta data; describe your site to make Google Bots happy
+  description: Consulting and end user support
+  navbarlogo:
+  # Logo (from static/images/logos/___)
+    image: logos/aurelian.svg
+    link: /
+  font:
+    name: "Open Sans"
+    sizes: [400,600]
+  hero:
+    # Main hero title
+    title: Consulting and Support
+    # Hero subtitle (optional)
+    subtitle: Restore your computing world
+    # Button text
+    buttontext: Contact us
+    # Where the main hero button links to
+    buttonlink: "/contact"
+    # Hero image (from static/images/___)
+    image: illustrations/worker.svg
+    # Footer logos (from static/images/logos/clients/___.svg)
+    # clientlogos:
+    # - systek
+    # - tribe
+    # - kromo
+    # - infinite
+    # - gutwork
+
+  # Customizable navbar. For a dropdown, add a "sublinks" list.
+  navbar:
+  - title: Blog
+    url: /blog
+  - title: Services
+    url: /services
+  - title: Pricing
+    url: /pricing
+  - title: Contact Us
+    url: /contact
+  # - title: Dropdown
+  #   sublinks:
+  #   - title: Dropdown item
+  #     url: /
+  #   - title: Dropdown item
+  #     url: /
+  #   - title: Dropdown item
+  #     url: /
+  # - title: Log in
+  #   url: /
+  # - title: Sign up
+  #   url: /
+  #   button: true
+
+  # sidebar:
+  #   # Logo (from /images/logos/___.svg)
+  #   logo: fresh-square
+  #   sections:
+  #   - title: User
+  #     icon: user
+  #     links:
+  #     - text: Profile
+  #       url: /
+  #     - text: Account
+  #       url: /
+  #     - text: Settings
+  #       url: /
+  #   - title: Messages
+  #     icon: envelope
+  #     links:
+  #     - text: Inbox
+  #       url: /
+  #     - text: Compose
+  #       url: /
+  #   - title: Images
+  #     icon: image
+  #     links:
+  #     - text: Library
+  #       url: /
+  #     - text: Upload
+  #       url: /
+  #   - title: Settings
+  #     icon: cog
+  #     links:
+  #     - text: User settings
+  #       url: /
+  #     - text: App settings
+  #       url: /
+
+  section1:
+    title: Services
+    subtitle: that we offer
+    tiles:
+    - title: Websites & Emails
+      icon: mouse-globe
+      text: Custom sites and email for your domain
+      url: /domain
+      buttonText: Get Started
+    - title: Integration & Automation
+      icon: plug-cloud
+      text: Service integrations with 3rd party apps and automation
+      url: /integrations
+      buttonText: Get started
+    - title: Support
+      icon: laptop-cloud
+      text: End user support for Windows, macOS and Linux
+      url: /support
+      buttonText: Get started
+
+  section2:
+    title: Secure, powerful and efficient
+    subtitle: let us handle it
+    features:
+    - title: Secure
+      text: We like keep things simple for you. Structure and protect your data.
+      # Icon (from /images/illustrations/icons/___.svg)
+      icon: shield-checkmark-outline
+    - title: Powerfull
+      text: Use the right tool for the job. We design solutions around AWS and Google Cloud Platform.
+      icon: logo-amazon
+    - title: Efficient
+      text: Get the most out of your money
+      icon: golf-outline
+
+  # section3:
+  #   title: One platform
+  #   subtitle: To rule them all
+  #   image: illustrations/mockups/app-mockup.png
+  #   buttonText: Get started
+  #   buttonLink: "#"
+
+  # section4:
+  #   title: Our Clients love us!
+  #   subtitle: Lorem ipsum sit dolor amet is a dummy text used by typography industry
+  #   clients:
+  #   - name: Irma Walters
+  #     quote: Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
+  #     job: Accountant
+  #     img: 1
+  #   - name: John Bradley
+  #     quote: Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
+  #     job: Financial Analyst
+  #     img: 2
+  #   - name: Gary Blackman
+  #     quote: Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
+  #     job: HR Manager
+  #     img: 3
+
+  section5: true
+  footer:
+    # Logo (from /images/logos/___)
+    logo: aurelian-alt.svg
+    # Social Media Title
+    socialmediatitle: Follow Us
+    # Social media links (GitHub, Twitter, etc.). All are optional.
+    socialmedia:
+    - link: https://github.com/aurelian
+      # Icons are from Font Awesome
+      icon: github
+    - link: https://facebook.com/aurelian
+      icon: facebook
+    - link: https://twitter.com/aurelian
+      icon: twitter
+    bulmalogo: true
+    quicklinks:
+      column1:
+        title: "Services"
+        links:
+        - text: Why choose us?
+          link: /choose-us
+        - text: About
+          link: /about
+      column2:
+        title: "Blog"
+        links:
+        - text: Latest blog entry
+          link: /blog/initial-work-on-a-new-distro
